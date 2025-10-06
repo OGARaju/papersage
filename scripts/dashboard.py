@@ -369,8 +369,6 @@ custom_css = """
 }
 
 /* --- Gradio Theme Variable Overrides for Pastel Primary Color --- */
-/* This section targets the theme variables directly for maximum specificity, 
-   ensuring that 'primary' buttons (variant="primary") become soft teal. */
 :root {
     --primary-50: #f0f7f8 !important;   /* Lighter shade */
     --primary-100: #d4e8ec !important;  /* Light shade */
@@ -382,7 +380,6 @@ custom_css = """
 }
 
 /* Pastel Button Styles - Unified Soft Teal */
-/* Apply these styles to all button classes */
 .gr-button, 
 .gr-button.primary, 
 .gr-button:not(.primary) {
@@ -404,9 +401,21 @@ custom_css = """
 h1, h2, h3 {
     color: #797d9a !important; 
 }
+
+/* --- TAB VISIBILITY FIX --- */
+/* Target the span element that holds the tab title text */
+/* Sets the color for ALL tab labels (active and inactive) */
+.gradio-tabs > div:first-child .gr-tab-button span {
+    color: var(--primary-500) !important; /* Force dark teal text always visible */
+}
+
+/* Optional: Ensure the selected tab is highlighted with background */
+.gradio-tabs > div:first-child .gr-tab-button.selected {
+    background-color: var(--primary-100) !important; /* Light teal background for active tab */
+}
 """
 
-with gr.Blocks(theme=gr.themes.Soft(), title="NASA Space Biology Knowledge AI Research Dashboard", css=custom_css) as app:
+with gr.Blocks(theme=gr.themes.Soft(), title="NASA Space Biology Knowledge AI Research Dashboard") as app:
     # --- Logo and Main Title Section ---
     gr.Markdown(
         f"""
